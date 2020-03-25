@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{Component} from 'react';
 import './App.css';
+import Content from './Content';
+import NeXt from './NeXt';
+import Frames from './Frame'
 
-function App() {
+class App extends Component {
+
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+         pictures: ''
+    }
+}
+componentDidMount(){
+  fetch('https://jsonplaceholder.typicode.com/photos')
+  .then(res => res.json())
+  .then(res=>{
+    // this.setState({
+    //   pictures: res
+    // })
+  console.log(res)
+  })
+}
+
+
+
+  render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+            <Frames/>
+            <Content picture={this.state.pictures}/>
+            <NeXt change={this.change} />  
     </div>
   );
+  }
 }
 
 export default App;
